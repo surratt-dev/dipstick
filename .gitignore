@@ -1,0 +1,441 @@
+# ============================================================================
+# Dipstick Project .gitignore
+# Full-stack Next.js/TypeScript application with LLM tooling protection
+# ============================================================================
+
+# ============================================================================
+# LLM / AI TOOLING PROTECTION (Maximum Data Leakage Prevention)
+# ============================================================================
+
+# Claude Code / Anthropic
+.claude/
+.claude-code/
+claude-history/
+.anthropic/
+
+# GitHub Copilot
+.copilot/
+.github-copilot/
+
+# Cursor IDE
+.cursor/
+.cursorrules-*
+cursor-tutor/
+
+# Codeium
+.codeium/
+
+# General AI/LLM artifacts
+.ai/
+.llm/
+ai-conversations/
+llm-logs/
+prompts-history/
+*.prompt
+*.ai-log
+*.llm-cache
+
+# AI-generated artifacts (be careful with this - review before committing)
+**/ai-generated-temp/
+**/.ai-temp/
+
+# ChatGPT / OpenAI artifacts
+.chatgpt/
+.openai/
+
+# Tabnine
+.tabnine/
+
+# Amazon CodeWhisperer
+.aws-codewhisperer/
+
+# ============================================================================
+# DEPENDENCIES
+# ============================================================================
+
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependency directories
+jspm_packages/
+bower_components/
+
+# Package manager lock files (keep only one - uncomment the ones you DON'T use)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# ============================================================================
+# NEXT.JS
+# ============================================================================
+
+# Next.js build output
+.next/
+out/
+
+# Next.js cache
+.next/cache/
+
+# Next.js telemetry
+.next/telemetry
+
+# Static export output
+/out
+
+# Next.js server files
+.vercel
+
+# ============================================================================
+# TYPESCRIPT
+# ============================================================================
+
+# TypeScript build info
+*.tsbuildinfo
+next-env.d.ts
+
+# TypeScript cache
+*.tscache
+
+# ============================================================================
+# TESTING
+# ============================================================================
+
+# Jest coverage
+coverage/
+.nyc_output/
+*.lcov
+
+# Test results
+test-results/
+junit.xml
+
+# Playwright
+playwright-report/
+playwright/.cache/
+test-results/
+
+# ============================================================================
+# BUILD ARTIFACTS
+# ============================================================================
+
+# Build directories
+build/
+dist/
+.cache/
+
+# Compiled files
+*.js.map
+*.css.map
+
+# ============================================================================
+# ENVIRONMENT & SECRETS
+# ============================================================================
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+
+# Secrets
+secrets/
+*.key
+*.pem
+*.cert
+*.crt
+*.p12
+*.pfx
+
+# Configuration with potential secrets
+config/local.json
+config/secrets.json
+
+# ============================================================================
+# LOGS
+# ============================================================================
+
+# Application logs
+logs/
+*.log
+log/
+
+# Runtime logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS logs
+*.swp
+*.swo
+*~
+
+# ============================================================================
+# DATABASES
+# ============================================================================
+
+# SQLite
+*.sqlite
+*.sqlite3
+*.db
+
+# Local database files
+/data/
+*.dump
+
+# Database migrations backup
+migrations-backup/
+
+# ============================================================================
+# DOCKER & KUBERNETES (Future use)
+# ============================================================================
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+
+# Kubernetes secrets
+k8s/secrets/
+k8s/*secret*.yaml
+k8s/*secret*.yml
+
+# Helm
+charts/*/charts/
+charts/*/.helmignore
+
+# ============================================================================
+# IDE & EDITOR FILES
+# ============================================================================
+
+# VSCode
+.vscode/
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.vscode/extensions.json
+*.code-workspace
+
+# Keep shared IDE config (optional - uncomment if you want to commit these)
+# !.vscode/settings.json
+# !.vscode/tasks.json
+# !.vscode/launch.json
+# !.vscode/extensions.json
+
+# IntelliJ / WebStorm
+.idea/
+*.iml
+*.ipr
+*.iws
+.idea_modules/
+out/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+Session.vim
+Sessionx.vim
+.netrwhist
+*~
+tags
+[._]*.un~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+.org-id-locations
+*_archive
+*_flymake.*
+/eshell/history
+/eshell/lastdir
+/elpa/
+*.rel
+.cask/
+dist/
+flycheck_*.el
+/server/
+.projectile
+.dir-locals.el
+/network-security.data
+
+# ============================================================================
+# OPERATING SYSTEM FILES
+# ============================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+.directory
+.Trash-*
+.nfs*
+
+# ============================================================================
+# TEMPORARY FILES & BACKUPS
+# ============================================================================
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+*.backup
+*.swp
+*.swo
+
+# Archive files (be cautious)
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+
+# ============================================================================
+# MEDIA & LARGE FILES (Review based on your needs)
+# ============================================================================
+
+# Uncomment if you want to exclude large media files
+# *.mp4
+# *.mov
+# *.avi
+# *.mkv
+# *.mp3
+# *.wav
+
+# ============================================================================
+# PROJECT-SPECIFIC
+# ============================================================================
+
+# Storybook build
+storybook-static/
+
+# Bundle analyzer reports
+.bundle-analyzer/
+bundle-report.html
+
+# Turbo
+.turbo
+
+# Misc
+*.pyc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local Netlify folder
+.netlify
+
+# Sentry
+.sentryclirc
+
+# ============================================================================
+# DOCUMENTATION ARTIFACTS (Generated docs)
+# ============================================================================
+
+# Generated documentation (if using tools like TypeDoc)
+docs-generated/
+api-docs-generated/
+
+# ============================================================================
+# MONITORING & PROFILING
+# ============================================================================
+
+# Profiling data
+*.cpuprofile
+*.heapprofile
+*.heapsnapshot
+
+# Lighthouse reports
+lighthouse-report.html
+
+# ============================================================================
+# KEEP FILES (Force include certain files)
+# ============================================================================
+
+# Keep .gitkeep files to preserve empty directories
+!.gitkeep
+
+# Keep example environment file (template for others)
+!.env.example
+!.env.template
+
+# ============================================================================
+# SPECKIT / FEATURE DEVELOPMENT
+# ============================================================================
+
+# Keep .specify directory (it's part of the project structure)
+# !.specify/
+
+# Temporary feature work (if you create temp directories during development)
+specs/**/temp/
+specs/**/*.draft.md
