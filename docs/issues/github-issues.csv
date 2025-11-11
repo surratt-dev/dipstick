@@ -1,0 +1,216 @@
+title,body,labels,assignee
+"[Epic 1] Team Setup: Create teams","**User Story:** US-1.1
+
+As an administrator, I want to create teams so that I can organize engineers into their product team groups.
+
+**Functional Requirements:**
+- FR-1.1: System shall allow administrators to create teams
+- FR-1.4: System shall store team membership and role information
+
+**Acceptance Criteria:**
+- [ ] Administrator can create a new team with a name
+- [ ] Team information is persisted to database
+- [ ] Team ID (UUID) is generated and stored
+- [ ] Quorum rules can be configured for the team","epic-1,team-setup,feature,priority-high",
+"[Epic 1] Team Setup: Add team members","**User Story:** US-1.2
+
+As an administrator, I want to add team members so that they can participate in their team's health checks.
+
+**Functional Requirements:**
+- FR-1.2: System shall allow administrators to add/remove team members
+- FR-1.4: System shall store team membership and role information
+
+**Acceptance Criteria:**
+- [ ] Administrator can add users to a team
+- [ ] Administrator can remove users from a team
+- [ ] Team membership is persisted to database
+- [ ] Users have appropriate role assignments","epic-1,team-setup,feature,priority-high",
+"[Epic 1] Team Setup: Assign facilitators","**User Story:** US-1.3
+
+As an administrator, I want to assign facilitators from outside the team so that all team members can participate equally.
+
+**Functional Requirements:**
+- FR-1.3: System shall allow administrators to designate facilitators (external to team)
+- FR-1.4: System shall store team membership and role information
+
+**Acceptance Criteria:**
+- [ ] Administrator can designate users as facilitators
+- [ ] Facilitators can be assigned to teams they are not members of
+- [ ] Facilitator role is properly stored and enforced","epic-1,team-setup,feature,priority-high",
+"[Epic 2] Session Preparation: Create a new session","**User Story:** US-2.1
+
+As a facilitator, I want to create a new session so that my team can conduct their health check.
+
+**Functional Requirements:**
+- FR-3.1.1: Facilitator shall be able to create a new session for a team
+- FR-3.1.2: System shall generate a unique session code/URL
+- FR-3.1.3: System shall use the team's active prompt set for the session
+
+**Acceptance Criteria:**
+- [ ] Facilitator can create a session for a designated team
+- [ ] System generates a unique session code (short alphanumeric)
+- [ ] System generates a shareable session URL","epic-2,session-preparation,feature,priority-high",
+"[Epic 2] Session Preparation: Share session code/URL","**User Story:** US-2.2
+
+As a facilitator, I want to share a session code/URL so that team members can join easily.
+
+**Acceptance Criteria:**
+- [ ] Facilitator can copy session code to clipboard
+- [ ] Facilitator can copy full session URL to clipboard
+- [ ] Session code is short and easy to communicate","epic-2,session-preparation,feature,priority-medium",
+"[Epic 2] Session Preparation: Join session via code/URL","**User Story:** US-2.3
+
+As a team member, I want to join a session via a code/URL so that I can participate from my device.
+
+**Acceptance Criteria:**
+- [ ] Team member can enter session code on join page
+- [ ] Team member can click session URL to join directly
+- [ ] System validates session code and loads correct session","epic-2,session-preparation,feature,priority-high",
+"[Epic 2] Session Preparation: See who has joined the waiting room","**User Story:** US-2.4
+
+As a facilitator, I want to see who has joined the waiting room so that I know when we have quorum.
+
+**Acceptance Criteria:**
+- [ ] Facilitator sees list of participants who have joined
+- [ ] Facilitator sees list of expected team members not yet joined
+- [ ] Start Session button enabled when quorum met","epic-2,session-preparation,feature,priority-high",
+"[Epic 3] Conducting Session: Progress through prompts","**User Story:** US-3.1
+
+As a facilitator, I want to progress through prompts one at a time so that I can guide the team through the discussion.
+
+**Acceptance Criteria:**
+- [ ] Facilitator has Next/Previous navigation controls
+- [ ] Current prompt displays to all participants in real-time
+- [ ] Progress indicator shows position in session","epic-3,conducting-session,feature,priority-high",
+"[Epic 3] Conducting Session: See current prompt and thinking points","**User Story:** US-3.2
+
+As a team member, I want to see the current prompt and thinking points so that I can consider my vote thoughtfully.
+
+**Acceptance Criteria:**
+- [ ] Current prompt text is clearly displayed
+- [ ] Sub-prompts (thinking points) are visible
+- [ ] UI is optimized for mobile viewing","epic-3,conducting-session,feature,priority-high",
+"[Epic 3] Conducting Session: Vote anonymously","**User Story:** US-3.3
+
+As a team member, I want to vote anonymously so that I can provide honest feedback without fear of judgment.
+
+**Acceptance Criteria:**
+- [ ] Team member can indicate Ready to vote
+- [ ] Countdown displays when all ready
+- [ ] Individual votes are never shown to other team members
+- [ ] Individual vote data is encrypted at rest","epic-3,conducting-session,feature,priority-high,security",
+"[Epic 3] Conducting Session: See aggregate results in real-time","**User Story:** US-3.4
+
+As a team member, I want to see aggregate results in real-time so that I understand team sentiment.
+
+**Acceptance Criteria:**
+- [ ] Aggregate results display immediately after voting closes
+- [ ] For finger votes: Distribution bar, average score, total votes
+- [ ] Results appear within 500ms of last vote cast","epic-3,conducting-session,feature,priority-high,performance",
+"[Epic 3] Conducting Session: See individual votes (facilitator)","**User Story:** US-3.5
+
+As a facilitator, I want to see individual votes so that I can identify outliers for discussion.
+
+**Acceptance Criteria:**
+- [ ] Facilitator view displays individual votes with participant names
+- [ ] Outliers are visually highlighted (>1.5 std dev from mean)
+- [ ] Access to individual vote data is logged for audit","epic-3,conducting-session,feature,priority-high,security",
+"[Epic 3] Conducting Session: Capture notes during discussion","**User Story:** US-3.6
+
+As a facilitator, I want to capture notes during discussion so that I can record insights without disrupting flow.
+
+**Acceptance Criteria:**
+- [ ] Facilitator has notes panel for current prompt
+- [ ] Notes can be added in real-time during discussion
+- [ ] All notes are automatically timestamped","epic-3,conducting-session,feature,priority-medium",
+"[Epic 3] Conducting Session: Capture action items","**User Story:** US-3.7
+
+As a facilitator, I want to capture action items so that the team remembers follow-up tasks.
+
+**Acceptance Criteria:**
+- [ ] Facilitator can add action items during session
+- [ ] Action items include: description, assigned to, related prompt
+- [ ] Action items appear in session summary","epic-3,conducting-session,feature,priority-medium",
+"[Epic 4] Understanding Trends: See historical trends during session","**User Story:** US-4.1
+
+As a facilitator, I want to see historical trends during the session so that I can provide context to the team.
+
+**Acceptance Criteria:**
+- [ ] Facilitator can view historical data for current prompt during session
+- [ ] Line chart shows average scores over time
+- [ ] Historical query returns within 2 seconds","epic-4,trends,feature,priority-medium,performance",
+"[Epic 4] Understanding Trends: See how scores have changed over time","**User Story:** US-4.2
+
+As a team member, I want to see how our scores have changed over time so that I can understand if we're improving.
+
+**Acceptance Criteria:**
+- [ ] Team member can access historical trends view
+- [ ] Line chart displays average scores over time per prompt
+- [ ] Only aggregate data is shown","epic-4,trends,feature,priority-medium",
+"[Epic 4] Understanding Trends: View trends across multiple teams (Manager)","**User Story:** US-4.3
+
+As an engineering manager, I want to view trends across multiple teams so that I can identify systemic issues.
+
+**Acceptance Criteria:**
+- [ ] Manager can access multi-team historical dashboard
+- [ ] Team selector allows filtering by specific teams
+- [ ] Trends can be compared across teams","epic-4,trends,feature,priority-low",
+"[Epic 4] Understanding Trends: Export session summaries","**User Story:** US-4.4
+
+As a facilitator, I want to export session summaries so that I can share results with stakeholders.
+
+**Acceptance Criteria:**
+- [ ] Summary can be exported as Markdown format
+- [ ] Summary can be exported as PDF format
+- [ ] Summary has a shareable URL","epic-4,trends,feature,priority-medium",
+"[Epic 5] Customization: Customize prompt set","**User Story:** US-5.1
+
+As a team lead, I want to customize our prompt set so that the health check addresses our specific concerns.
+
+**Acceptance Criteria:**
+- [ ] Team lead can activate/deactivate prompts
+- [ ] Team lead can modify existing prompt text
+- [ ] Changes are versioned","epic-5,customization,feature,priority-low",
+"[Epic 5] Customization: Create custom prompts","**User Story:** US-5.2
+
+As a team lead, I want to create custom prompts so that we can track team-specific metrics.
+
+**Acceptance Criteria:**
+- [ ] Team lead can create new custom prompts
+- [ ] Custom prompt includes: prompt text, voting type, category, sub-prompts
+- [ ] Custom prompts persist and can be reused","epic-5,customization,feature,priority-low",
+"[Epic 5] Customization: Start with standard prompts","**User Story:** US-5.3
+
+As a team, we want to start with standard prompts so that we don't have to create everything from scratch.
+
+**Acceptance Criteria:**
+- [ ] Default prompt set is provided for all new teams
+- [ ] Default set includes 13 prompts across 4 categories
+- [ ] Default prompts have pre-defined sub-prompts","epic-5,customization,feature,priority-high",
+"[Infrastructure] WebSocket real-time voting system","Implement WebSocket infrastructure for real-time voting and session updates.
+
+**Acceptance Criteria:**
+- [ ] WebSocket server implemented
+- [ ] WebSocket client connection management
+- [ ] Automatic reconnection on disconnect
+- [ ] Vote buffering during network issues","infrastructure,technical,priority-high,performance",
+"[Infrastructure] Database schema and migrations","Implement database schema based on data model in BRD with migration support.
+
+**Acceptance Criteria:**
+- [ ] PostgreSQL schema implemented
+- [ ] All entities created with proper relationships
+- [ ] Migration framework set up","infrastructure,database,technical,priority-high",
+"[Infrastructure] Authentication and authorization","Implement role-based access control (RBAC) with simple authentication.
+
+**Acceptance Criteria:**
+- [ ] Simple username/password authentication
+- [ ] Session management with configurable timeout
+- [ ] Role-based middleware for route protection
+- [ ] TLS encryption enforced","infrastructure,security,technical,priority-high",
+"[Infrastructure] Mobile-responsive UI foundation","Establish responsive design foundation with Next.js and React.
+
+**Acceptance Criteria:**
+- [ ] Next.js project initialized with TypeScript
+- [ ] UI component library configured
+- [ ] Mobile-first responsive design system
+- [ ] Touch-friendly UI components (44x44px minimum)","infrastructure,ui,technical,priority-high",
