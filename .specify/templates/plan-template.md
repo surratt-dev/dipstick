@@ -17,21 +17,30 @@
   the iteration process.
 -->
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+**Language/Version**: TypeScript (strict mode), Node.js LTS
+**Primary Dependencies**: Next.js (App Router), React 18+, [additional as needed]
+**Storage**: [if applicable, e.g., PostgreSQL, MongoDB, Redis or N/A]
+**Testing**: Jest, React Testing Library (88% coverage minimum)
+**Target Platform**: Web (browser + Node.js server), Future: Kubernetes
+**Project Type**: web (Next.js full-stack application)
+**Performance Goals**: [domain-specific, e.g., <3s initial page load, <1s navigation or NEEDS CLARIFICATION]
+**Constraints**: Cloud-native patterns (stateless, config via env vars, health endpoints)
+**Scale/Scope**: [domain-specific, e.g., 10k users, 100+ components, 20+ pages or NEEDS CLARIFICATION]
 
 ## Constitution Check
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+Verify compliance with `.specify/memory/constitution.md`:
+
+- [ ] **TypeScript-Only**: All code written in TypeScript with `strict: true`
+- [ ] **Test-First**: Tests written and approved before implementation (88% coverage minimum)
+- [ ] **Cloud-Native**: Stateless design, environment-based config, health endpoints
+- [ ] **Next.js Best Practices**: App Router, Server Components by default, proper data fetching
+- [ ] **Security Awareness**: No hardcoded secrets, input validation, vulnerability prevention
+- [ ] **Documentation**: README, API docs, component docs, ADRs for significant decisions
+
+**Violations requiring justification**: [List any constitution principles this feature cannot follow and why]
 
 ## Project Structure
 
@@ -49,50 +58,45 @@ specs/[###-feature]/
 
 ### Source Code (repository root)
 <!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
+  ACTION REQUIRED: Expand this structure with the actual directories and files
+  needed for this feature. Add specific paths like app/api/users/, components/auth/, etc.
 -->
 
 ```text
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── models/
-├── services/
-├── cli/
-└── lib/
+# Next.js App Router Structure
+app/
+├── api/                    # API routes
+│   └── [feature]/         # Feature-specific endpoints
+├── [feature]/             # Feature pages (routes)
+│   ├── page.tsx          # Page component (Server Component by default)
+│   ├── layout.tsx        # Layout for this route
+│   └── loading.tsx       # Loading UI
+├── layout.tsx            # Root layout
+└── page.tsx              # Home page
 
-tests/
-├── contract/
-├── integration/
-└── unit/
+components/
+├── ui/                   # Reusable UI components
+├── forms/                # Form components
+└── [feature]/           # Feature-specific components
 
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
+lib/
+├── utils/               # Utility functions
+├── hooks/               # Custom React hooks
+├── types/               # TypeScript type definitions
+└── api/                 # API client functions
 
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
+__tests__/
+├── integration/         # Integration tests
+├── unit/                # Unit tests
+└── components/          # Component tests
 
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+public/                  # Static assets
+└── [images, fonts, etc.]
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+**Structure Decision**: Using Next.js App Router with TypeScript. Server Components by default,
+Client Components marked with 'use client' directive. API routes in app/api/, shared components
+in components/, utilities in lib/.
 
 ## Complexity Tracking
 

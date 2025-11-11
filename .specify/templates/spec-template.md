@@ -1,9 +1,21 @@
 # Feature Specification: [FEATURE NAME]
 
-**Feature Branch**: `[###-feature-name]`  
-**Created**: [DATE]  
-**Status**: Draft  
+**Feature Branch**: `[###-feature-name]`
+**Created**: [DATE]
+**Status**: Draft
 **Input**: User description: "$ARGUMENTS"
+
+---
+
+**Constitution Compliance**: This feature must adhere to principles in `.specify/memory/constitution.md`:
+- TypeScript-only with strict mode
+- Test-first development (88% coverage)
+- Cloud-native patterns (stateless, env config)
+- Next.js/React best practices
+- Security awareness (no hardcoded secrets, input validation)
+- Comprehensive documentation
+
+---
 
 ## User Scenarios & Testing *(mandatory)*
 
