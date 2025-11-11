@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:14-alpine
+    container_name: dipstick-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: dipstick_user
+      POSTGRES_PASSWORD: dipstick_dev_password
+      POSTGRES_DB: dipstick_dev
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=en_US.UTF-8"
+      # PostgreSQL performance tuning
+      POSTGRES_MAX_CONNECTIONS: 100
+      POSTGRES_SHARED_BUFFERS: 256MB
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/postgres/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dipstick_user -d dipstick_dev"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - dipstick-network
+
+  # pgAdmin - Database Management UI (Optional)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: dipstick-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@dipstick.local
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+      - ./docker/pgadmin/servers.json:/pgadmin4/servers.json
+    depends_on:
+      - postgres
+    networks:
+      - dipstick-network
+    profiles:
+      - tools
+
+  # Redis - Session Storage & WebSocket Pub/Sub (Optional, for production scaling)
+  redis:
+    image: redis:7-alpine
+    container_name: dipstick-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    networks:
+      - dipstick-network
+    profiles:
+      - full
+
+volumes:
+  postgres_data:
+    driver: local
+  pgadmin_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  dipstick-network:
+    driver: bridge

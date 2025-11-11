@@ -205,12 +205,14 @@ lerna-debug.log*
 migrations-backup/
 
 # ============================================================================
-# DOCKER & KUBERNETES (Future use)
+# DOCKER & KUBERNETES
 # ============================================================================
 
 # Docker
 docker-compose.override.yml
-.dockerignore
+
+# Keep .dockerignore as it's part of the project
+# .dockerignore
 
 # Kubernetes secrets
 k8s/secrets/

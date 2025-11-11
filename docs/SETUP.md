@@ -9,21 +9,59 @@
 ## Table of Contents
 
 1. [Overview](#overview)
-2. [Technology Stack](#technology-stack)
-3. [Prerequisites](#prerequisites)
-4. [Initial Setup](#initial-setup)
-5. [Development Environment](#development-environment)
-6. [Database Setup](#database-setup)
-7. [Running the Application](#running-the-application)
-8. [Testing](#testing)
-9. [Deployment](#deployment)
-10. [Troubleshooting](#troubleshooting)
+2. [Quick Start](#quick-start)
+3. [Technology Stack](#technology-stack)
+4. [Prerequisites](#prerequisites)
+5. [Initial Setup](#initial-setup)
+6. [Development Environment](#development-environment)
+7. [Database Setup](#database-setup)
+8. [Running the Application](#running-the-application)
+9. [Testing](#testing)
+10. [Deployment](#deployment)
+11. [Troubleshooting](#troubleshooting)
 
 ---
 
 ## Overview
 
 This guide walks you through setting up the Engineering Health Check Tool on your local development machine. The tool is a web-based application that facilitates engineering team retrospectives through real-time anonymous voting and historical trend tracking.
+
+---
+
+## Quick Start
+
+**For the impatient:** Get PostgreSQL running in under 1 minute with Docker.
+
+```bash
+# 1. Install Docker (if not already installed)
+# Download from https://docs.docker.com/get-docker/
+
+# 2. Clone the repository
+git clone <repository-url>
+cd dipstick
+
+# 3. Start PostgreSQL
+make up
+# Or without make:
+docker-compose up -d
+
+# 4. Verify it's running
+docker-compose ps
+
+# 5. (Optional) Access pgAdmin database UI
+make up-tools
+# Navigate to http://localhost:5050
+```
+
+**That's it!** PostgreSQL is now running with:
+- Development database (`dipstick_dev`) and test database (`dipstick_test`)
+- Required extensions (UUID, encryption)
+- Persistent data storage
+
+**Next steps:**
+- Copy `.env.example` to `.env` and configure
+- When backend is ready, run migrations
+- See [Development Environment](#development-environment) for full setup
 
 ---
 
@@ -120,46 +158,18 @@ Before proceeding, familiarize yourself with:
 
 Create environment configuration files for local development:
 
-#### Frontend Environment (.env.local or .env)
 ```bash
-# API Configuration
-REACT_APP_API_URL=http://localhost:8000
-REACT_APP_WS_URL=ws://localhost:8000/ws
-
-# Environment
-NODE_ENV=development
-
-# Feature Flags (optional)
-REACT_APP_ENABLE_DEV_TOOLS=true
+# Copy the example environment file
+cp .env.example .env
 ```
 
-#### Backend Environment (.env)
-```bash
-# Database Configuration
-DATABASE_URL=postgresql://dipstick_user:password@localhost:5432/dipstick_dev
-DATABASE_POOL_SIZE=20
-DATABASE_MAX_OVERFLOW=0
+Then edit `.env` with your specific configuration. See `.env.example` for all available options and detailed documentation.
 
-# Server Configuration
-PORT=8000
-HOST=0.0.0.0
-DEBUG=true
-
-# Security
-SECRET_KEY=your-secret-key-change-in-production
-JWT_ALGORITHM=HS256
-JWT_EXPIRATION_HOURS=4
-
-# CORS
-ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5173
-
-# WebSocket Configuration
-WS_HEARTBEAT_INTERVAL=30
-WS_MAX_CONNECTIONS=1000
-
-# Session Configuration
-SESSION_TIMEOUT_HOURS=4
-```
+**Key variables to configure:**
+- `DATABASE_URL` - PostgreSQL connection string
+- `SECRET_KEY` - Generate with: `openssl rand -hex 32`
+- `ALLOWED_ORIGINS` - Comma-separated list of allowed CORS origins
+- `REACT_APP_API_URL` / `VITE_API_URL` - Backend API endpoint
 
 **Security Note:** Never commit `.env` files to version control. These files are included in `.gitignore`.
 
@@ -239,33 +249,101 @@ The frontend should be accessible at `http://localhost:3000` or `http://localhos
 
 ### Option B: Docker Development Environment
 
-1. **Build and start containers:**
+The project includes a complete Docker Compose configuration for quick setup. See `docker/README.md` for detailed documentation.
+
+#### Quick Start with Docker
+
+1. **Start PostgreSQL database:**
    ```bash
-   docker-compose up --build
+   docker-compose up -d
    ```
 
-2. **Run database migrations:**
+   This starts PostgreSQL with:
+   - Automatic database initialization (creates `dipstick_dev` and `dipstick_test`)
+   - Required extensions (uuid-ossp, pgcrypto)
+   - Health checks
+   - Data persistence via volumes
+
+2. **Verify database is running:**
    ```bash
-   docker-compose exec backend npm run migrate
-   # or
-   docker-compose exec backend alembic upgrade head
+   docker-compose ps
+   docker-compose logs postgres
    ```
 
-3. **Access services:**
-   - Frontend: `http://localhost:3000`
-   - Backend API: `http://localhost:8000`
-   - Database: `localhost:5432`
-
-4. **Stop containers:**
+3. **Connect to the database:**
    ```bash
-   docker-compose down
+   # Using psql
+   psql postgresql://dipstick_user:dipstick_dev_password@localhost:5432/dipstick_dev
+
+   # Or using docker exec
+   docker-compose exec postgres psql -U dipstick_user -d dipstick_dev
    ```
+
+#### Optional Services
+
+**Start with pgAdmin (database management UI):**
+```bash
+docker-compose --profile tools up -d
+```
+Access pgAdmin at: `http://localhost:5050`
+- Email: `admin@dipstick.local`
+- Password: `admin`
+
+**Start with all services (includes Redis for session storage):**
+```bash
+docker-compose --profile full up -d
+```
+
+#### When You Have Backend/Frontend
+
+Once backend and frontend are developed, you can add them to docker-compose.yml:
+
+```bash
+# Start all services
+docker-compose up -d
+
+# Run database migrations
+docker-compose exec backend npm run migrate
+# or
+docker-compose exec backend alembic upgrade head
+
+# View logs
+docker-compose logs -f backend
+
+# Stop all services
+docker-compose down
+
+# Stop and remove all data
+docker-compose down -v
+```
+
+#### Access Services
+- PostgreSQL: `localhost:5432`
+  - Database: `dipstick_dev`
+  - User: `dipstick_user`
+  - Password: `dipstick_dev_password`
+- pgAdmin: `http://localhost:5050` (with `--profile tools`)
+- Redis: `localhost:6379` (with `--profile full`)
 
 ---
 
 ## Database Setup
 
-### 1. Create PostgreSQL Database
+### Option 1: Using Docker Compose (Recommended)
+
+If you're using the Docker Compose setup, **database creation is automatic**. The initialization script (`docker/postgres/init/01-init-databases.sql`) handles:
+- Creating `dipstick_dev` and `dipstick_test` databases
+- Installing required extensions (uuid-ossp, pgcrypto)
+- Setting up permissions
+
+Simply run:
+```bash
+docker-compose up -d
+```
+
+### Option 2: Manual PostgreSQL Setup
+
+If you're running PostgreSQL locally without Docker:
 
 #### Using psql CLI:
 
@@ -274,7 +352,7 @@ The frontend should be accessible at `http://localhost:3000` or `http://localhos
 psql -U postgres
 
 # Create database user
-CREATE USER dipstick_user WITH PASSWORD 'password';
+CREATE USER dipstick_user WITH PASSWORD 'dipstick_dev_password';
 
 # Create databases
 CREATE DATABASE dipstick_dev OWNER dipstick_user;
@@ -288,15 +366,18 @@ GRANT ALL PRIVILEGES ON DATABASE dipstick_test TO dipstick_user;
 \q
 ```
 
-#### Using Docker:
+#### Install required extensions:
 
 ```bash
-docker run --name dipstick-postgres \
-  -e POSTGRES_USER=dipstick_user \
-  -e POSTGRES_PASSWORD=password \
-  -e POSTGRES_DB=dipstick_dev \
-  -p 5432:5432 \
-  -d postgres:14
+# Connect to the database
+psql -U dipstick_user -d dipstick_dev
+
+# Install extensions
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+
+# Exit
+\q
 ```
 
 ### 2. Database Schema

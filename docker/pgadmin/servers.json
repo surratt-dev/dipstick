@@ -1,0 +1,14 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "Dipstick Development",
+      "Group": "Servers",
+      "Host": "postgres",
+      "Port": 5432,
+      "MaintenanceDB": "dipstick_dev",
+      "Username": "dipstick_user",
+      "SSLMode": "prefer",
+      "Comment": "Engineering Health Check Tool - Development Database"
+    }
+  }
+}
