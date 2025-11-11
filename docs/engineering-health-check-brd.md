@@ -557,7 +557,6 @@ graph TB
     
     subgraph Data
         H[(PostgreSQL)]
-        I[(Redis Cache)]
     end
     
     A --> B
@@ -567,14 +566,11 @@ graph TB
     D --> F
     F --> G
     F --> H
-    F --> I
-    E --> I
     E --> H
 ```
 
 **Key Technical Considerations:**
 - Real-time voting requires WebSocket connections
-- Vote aggregation can be cached in Redis for performance
 - Responsive design using mobile-first approach
 - Progressive Web App capabilities for offline resilience
 
@@ -678,7 +674,7 @@ See cleaned Engineering Health Check document for complete prompt set details.
 - Calendar integration for scheduling
 - AI-powered trend insights and recommendations
 - Cross-team benchmarking (anonymized)
-- Custom chart types for historical data
+- Historical data presented as a radar graph
 - Action item tracking integration
 - SSO/SAML authentication
 - Mobile native apps (iOS/Android)

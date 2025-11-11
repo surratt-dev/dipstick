@@ -4,7 +4,7 @@
 
 The Engineering Health Check is a recurring retrospective ritual for engineers, focusing on the process of developing and maintaining application code. It is part of deliberate engineering communication practices. This framework is adaptable - teams should modify the process, scope, prompts, and frequency as needed. The highlights are:
 
-- A recurring retrospective held by engineers on a product team about the process of developing and maintaining the application code
+- A recurring retrospective held by engineers on a  team about the process of developing and maintaining the application code
 - Sessions are brief to minimize impact to the team's delivery cadence
 - Facilitated by a senior engineer who can leverage their experience to help with the discussion and work through potential issues
 - Team health is captured as metrics through votes on subjective topics, tracked over time
@@ -12,7 +12,7 @@ The Engineering Health Check is a recurring retrospective ritual for engineers, 
 
 ## What
 
-The Engineering Health Check is a retrospective focused on the development experience and the code base for your applications. It's not a review of your test coverage or static analysis metrics, but rather about the engineer's satisfaction with the code base as a whole. An uninvested facilitator walks the engineers through a set of questions where each participant hand votes, typically on a scale of 1 to 4, sometimes using Roman voting. The facilitator captures the results in a spreadsheet each session so trends can be identified. The facilitator will also note outliers in the vote and prompt brief discussion on the topic. The trends or conversations may result in takeaways for the team to address.
+The Engineering Health Check is a retrospective focused on the development experience and the code base for your applications. It's not a review of your test coverage or static analysis metrics, but rather about the engineer's satisfaction with the code base as a whole. An uninvested facilitator walks the engineersteam through a set of questions where each participant hand votes, typically on a scale of 1 to 4, sometimes using Roman voting (thumbs up/ thumbs down). The facilitator captures the results in a spreadsheet each session so trends can be identified. The facilitator will also note outliers in the vote and prompt brief discussion on the topic. The trends or conversations may result in takeaways for the team to address.
 
 ## Why
 
@@ -54,7 +54,7 @@ Issues may be identified during these sessions, but the team shouldn't try to re
 
 ## Topics
 
-This table documents the set of topics to discuss during the health check. It's just a starting point. Each team should review the list, decide which topics are important to them, and make sure they all agree on what it means to them.
+This table documents a possible set of topics to discuss during the health check. It's just a starting point. Each team should review the list, decide which topics are important to them, and make sure they all agree on what it means to them.
 
 ### Developing and Changing Code
 
@@ -91,7 +91,8 @@ This table documents the set of topics to discuss during the health check. It's 
 
 ## Additional Notes
 
-- The set of topics can be added, removed, or tweaked to better benefit the team
+- The set of topics can be added, removed, or tweaked to better benefit the team.  
+Build into your cadence time review the set questions and determine if they are still valuable, are there subjects to be discussed
 - Consider tracking action items across sessions to make sure they are carried out, discuss if they are effective, and having a positive impact on the engineers
 - Make your first session an hour long to familiarize yourselves with the topics and process
 - If possible, use a room which is appropriate to the size of the team; it should be cozy not cavernous. A large room would give the participants space to spread out and make it easier for defensive posturing
